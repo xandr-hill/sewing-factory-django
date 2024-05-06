@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Дневные отчеты по пошиву</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Дата</th>
+        <th>Номер кроя</th>
+        <th>Количество произведенных изделий</th>
+        <th>Размер</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sewing_report in sewing_reports %}
+        <tr>
+          <td>{{ sewing_report.sewing_date }}</td>
+          <td>{{ sewing_report.cutting.id }}</td>
+          <td>{{ sewing_report.items_produced }}</td>
+          <td>{{ sewing_report.size }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

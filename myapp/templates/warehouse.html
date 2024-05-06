@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Склад</h2>
+  <a class="btn btn-primary" href="{% url 'add_fabric_roll' %}">Приход</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Номер рулона</th>
+        <th>Цвет</th>
+        <th>Количество</th>
+        <th>Килограммы или метраж</th>
+        <th>Склад ткани</th>
+        <th>Дата прихода</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for fabric_roll in fabric_rolls %}
+        <tr>
+          <td>{{ fabric_roll.number }}</td>
+          <td>{{ fabric_roll.color }}</td>
+          <td>{{ fabric_roll.quantity }}</td>
+          <td>{{ fabric_roll.weight_or_length }}</td>
+          <td>{{ fabric_roll.fabric_composition }}</td>
+          <td>{{ fabric_roll.arrival_date }}</td>
+          <td>
+            <a class="btn btn-warning" href="{% url 'edit_fabric_roll' fabric_roll.id %}">Редактировать</a>
+            <a class="btn btn-danger" href="{% url 'delete_fabric_roll' fabric_roll.id %}">Удалить</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

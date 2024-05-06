@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Дневные отчеты по утюгу</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Дата</th>
+        <th>Номер кроя</th>
+        <th>Название модели</th>
+        <th>Количество товара</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ironing_report in ironing_reports %}
+        <tr>
+          <td>{{ ironing_report.ironing_date }}</td>
+          <td>{{ ironing_report.cutting.id }}</td>
+          <td>{{ ironing_report.cutting.model_name }}</td>
+          <td>{{ ironing_report.items_ironed }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

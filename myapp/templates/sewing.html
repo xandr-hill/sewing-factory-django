@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Пошив</h2>
+  <!-- Форма дневного отчета -->
+  <form method="post" action="{% url 'sewing_report' %}" class="mb-4">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="sewing_date">Дата:</label>
+      <input type="date" name="sewing_date" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="cutting_id">Номер кроя или название модели:</label>
+      <select name="cutting_id" class="form-control" required>
+        {% for cutting in cuttings %}
+          <option value="{{ cutting.id }}">{{ cutting.id }} - {{ cutting.model_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <!-- Добавьте остальные поля формы по необходимости -->
+    <button type="submit" class="btn btn-primary">Отправить отчет</button>
+  </form>
+
+  <!-- Таблица с дневными отчетами -->
+  <h3>Дневные отчеты:</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Дата</th>
+        <th>Номер кроя</th>
+        <th>Название модели</th>
+        <th>Количество изделий</th>
+        <th>Размер</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for report in sewing_reports %}
+        <tr>
+          <td>{{ report.sewing_date }}</td>
+          <td>{{ report.cutting.id }}</td>
+          <td>{{ report.cutting.model_name }}</td>
+          <td>{{ report.items_produced }}</td>
+          <td>{{ report.size }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
